@@ -28,7 +28,9 @@ class IdleMonitor:
         """
         for monitor_class in cls.subclasses:
             try:
-                return monitor_class(**kwargs)
+                mc=monitor_class(**kwargs)
+                mc.get_idle_time()
+                return mc
             except Exception:
                 logger.warning("Could not load %s", monitor_class, exc_info=True)
         raise RuntimeError("Could not find a working monitor.")
